@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import fetchArticlesByKeyword from '../api/api';
-import ArticleCard from '../components/articleCard'; // Import the ArticleCard component
+import ArticleCard from '../components/articleCard';
 
 const SearchResults = () => {
   const { query } = useParams();
@@ -12,7 +12,6 @@ const SearchResults = () => {
     const fetchArticles = async () => {
       setLoading(true);
       try {
-        // Call the function to fetch articles
         const results = await fetchArticlesByKeyword(query);
         setArticles(results || []);
       } catch (error) {
@@ -36,7 +35,6 @@ const SearchResults = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {articles.length > 0 ? (
             articles.map((article, index) => (
-              // Use ArticleCard component to render each article
               <ArticleCard key={index} article={article} />
             ))
           ) : (

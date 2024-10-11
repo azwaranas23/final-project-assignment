@@ -10,7 +10,7 @@ const ProgrammingPage = () => {
   useEffect(() => {
     const fetchProgrammingArticles = async () => {
       setIsLoading(true);
-      setError(null); // Reset error state
+      setError(null);
       try {
         const programmingArticles = await fetchArticlesByKeyword('Programming');
         setArticles(programmingArticles);

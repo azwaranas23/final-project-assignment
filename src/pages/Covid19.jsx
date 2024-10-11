@@ -10,7 +10,7 @@ const Covid19Page = () => {
   useEffect(() => {
     const fetchCovid19Articles = async () => {
       setIsLoading(true);
-      setError(null); // Reset error state
+      setError(null);
       try {
         const covid19Articles = await fetchArticlesByKeyword('Covid');
         setArticles(covid19Articles);

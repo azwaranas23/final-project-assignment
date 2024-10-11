@@ -7,6 +7,7 @@ const routes = (
       <Route path="/article/:id" component={IndonesiaPage} />
       <Route path="/article/:id" component={ProgrammingPage} />
       <Route path="/article/:id" component={Covid19Page} />
+      <Route path="/article/:id" component={SavedPage} />
     </Switch>
   </BrowserRouter>
 );

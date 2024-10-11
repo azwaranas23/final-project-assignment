@@ -3,24 +3,19 @@ import axios from 'axios';
 const NYT_API_KEY = import.meta.env.VITE_NYT_API_KEY;
 const apiUrl = 'https://api.nytimes.com/svc/search/v2';
 
-// Simple in-memory cache
 const cache = new Map();
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+const CACHE_DURATION = 5 * 60 * 1000;
 
-// Rate limiting
 let lastRequestTime = 0;
-const RATE_LIMIT_DELAY = 6000; // 6 seconds between requests
+const RATE_LIMIT_DELAY = 6000;
 
 const fetchArticlesByKeyword = async (keyword, page = 0) => {
   const cacheKey = `${keyword}-${page}`;
   const now = Date.now();
 
-  // Check cache
   if (cache.has(cacheKey) && now - cache.get(cacheKey).timestamp < CACHE_DURATION) {
     return cache.get(cacheKey).data;
   }
-
-  // Implement rate limiting
   const timeToWait = Math.max(0, RATE_LIMIT_DELAY - (now - lastRequestTime));
   if (timeToWait > 0) {
     await new Promise(resolve => setTimeout(resolve, timeToWait));
@@ -39,7 +34,6 @@ const fetchArticlesByKeyword = async (keyword, page = 0) => {
     lastRequestTime = Date.now();
 
     if (response.status === 200 && response.data.response && response.data.response.docs) {
-      // Update cache
       cache.set(cacheKey, { data: response.data.response.docs, timestamp: now });
       return response.data.response.docs;
     } else {
@@ -53,7 +47,7 @@ const fetchArticlesByKeyword = async (keyword, page = 0) => {
       return fetchArticlesByKeyword(keyword, page); // Retry
     }
     console.error('Error fetching articles:', error);
-    throw error; // Propagate error to be handled by the component
+    throw error;
   }
 };
 

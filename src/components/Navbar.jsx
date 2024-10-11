@@ -8,7 +8,6 @@ const Navbar = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchTerm.trim()) {
-      // Redirect to search results page with the search term
       navigate(`/search/${searchTerm}`);
     }
   };
