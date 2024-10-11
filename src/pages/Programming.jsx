@@ -1,4 +1,3 @@
-// src/pages/Programming.jsx
 import React, { useState, useEffect } from 'react';
 import fetchArticlesByKeyword from '../api/api';
 import ArticleList from '../components/articleList';
@@ -6,7 +5,7 @@ import ArticleList from '../components/articleList';
 const ProgrammingPage = () => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null); // State untuk menangani error
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchProgrammingArticles = async () => {
